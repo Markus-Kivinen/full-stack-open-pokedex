@@ -75,16 +75,15 @@ jobs:
     if: github.event.pull_request.merged == true
     needs: [hello_world, build, tests]
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    permissions: write-all
     steps:
     - uses: actions/checkout@v4
-      if: ${{ !env.SKIP_PIPELINE }}
       with:
         ref: ${{ github.event.pull_request.merge_commit_sha }}
         fetch-depth: '0'
 
     - name: Bump version and push tag
+      if: ${{ !env.SKIP_PIPELINE }}
       uses: anothrNick/github-tag-action@e528bc2b9628971ce0e6f823f3052d1dcd9d512c
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

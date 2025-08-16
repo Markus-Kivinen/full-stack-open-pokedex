@@ -3,7 +3,7 @@ const app = express()
 require('dotenv').config()
 
 const PORT = process.env.PORT || 5000
-const VERSION = process.env.VERSION || '1.2.0'
+const VERSION = process.env.VERSION || '0.1.0'
 
 app.use(express.static('dist'))
 

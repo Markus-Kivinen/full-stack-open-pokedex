@@ -6,6 +6,18 @@ on:
       - main
 
 jobs:
+  hello_world_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say hello
+        run: |
+          echo "Hello World!"
+      - name: Now it is
+        run: |
+          date
+      - name: Directory content
+        run: |
+          ls -l
   simple_deployment_pipeline:
     runs-on: ubuntu-latest
     steps:
@@ -13,8 +25,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - name: Install dependencies 
-        run: npm install  
+      - name: Install dependencies
+        run: npm install
 
       - name: Check style
         run: npm run eslint
+
+      - name: Build
+        run: npm run build
+
+      - name: Run tests
+        run: npm test

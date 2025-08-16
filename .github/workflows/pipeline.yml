@@ -1,5 +1,8 @@
 name: Deployment pipeline
 
+env:
+  SKIP_PIPELINE: ${{ contains(github.event.head_commit.message, '#skip') }}
+
 on:
   push:
     branches:
@@ -73,7 +76,8 @@ jobs:
     needs: [hello_world_job, simple_deployment_pipeline, tests]
     if: ${{ github.event_name == 'push' }}
     steps:
-    - name: Bump version and push tag
+    - if: ${{ !env.SKIP_PIPELINE }}
+      name: Bump version and push tag
       uses: anothrNick/github-tag-action@1.73.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

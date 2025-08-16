@@ -74,7 +74,7 @@ jobs:
   tag_release:
     if: github.event.pull_request.merged == true
     needs: [hello_world, build, tests]
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:

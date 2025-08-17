@@ -78,6 +78,14 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
+  webhook:
+    runs-on: ubuntu-latest
+    steps:
+    - name: webhook
+      uses: sarisia/actions-status-discord@v1
+      if: always()
+      with:
+        webhook: ${{ secrets.DISCORD_WEBHOOK }}
 
 
   deploy:

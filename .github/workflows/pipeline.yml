@@ -119,4 +119,4 @@ jobs:
         uses: sarisia/actions-status-discord@v1
         with:
           webhook: ${{ secrets.DISCORD_WEBHOOK }}
-          status: ${{ (needs.backend.result == 'success' && needs.frontend.result == 'success') && 'success' || 'failure' }}
+          status: ${{ (needs.build.result == 'success' && needs.tests.result == 'success') && 'success' || 'failure' }}
